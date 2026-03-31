@@ -1,6 +1,11 @@
 import { NextResponse } from "next/server";
-import { writeFile, mkdir } from "fs/promises";
-import path from "path";
+import { v2 as cloudinary } from "cloudinary";
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 export async function POST(request: Request) {
     try {
@@ -11,20 +16,22 @@ export async function POST(request: Request) {
             return NextResponse.json({ error: "No files received." }, { status: 400 });
         }
 
-        const uploadDir = path.join(process.cwd(), "public/uploads");
-        await mkdir(uploadDir, { recursive: true });
-
         const urls: string[] = [];
 
         for (const file of files) {
             const bytes = await file.arrayBuffer();
             const buffer = Buffer.from(bytes);
 
-            const filename = `${Date.now()}-${file.name.replace(/\s+/g, '-')}`;
-            const filepath = path.join(uploadDir, filename);
+            // Upload buffer to Cloudinary as a base64 data URI
+            const base64 = buffer.toString("base64");
+            const dataUri = `data:${file.type};base64,${base64}`;
 
-            await writeFile(filepath, buffer);
-            urls.push(`/uploads/${filename}`);
+            const result = await cloudinary.uploader.upload(dataUri, {
+                folder: "alana",
+                resource_type: "image",
+            });
+
+            urls.push(result.secure_url);
         }
 
         return NextResponse.json({ urls });

@@ -13,6 +13,7 @@
     "@libsql/client": "^0.17.2",
     "@radix-ui/react-dialog": "^1.1.15",
     "class-variance-authority": "^0.7.1",
+    "cloudinary": "^2.9.0",
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.45.2",
     "embla-carousel-react": "^8.6.0",
