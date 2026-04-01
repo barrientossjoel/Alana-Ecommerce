@@ -36,15 +36,22 @@ export default function ProductForm({ product, onSuccess }: { product?: Product,
         try {
             const res = await fetch("/api/upload", { method: "POST", body: formData });
             const data = await res.json();
-            if (data.urls) {
+
+            if (!res.ok || data.error) {
+                toast.error(`Error al subir: ${data.error || res.statusText}`);
+                return;
+            }
+
+            if (data.urls?.length) {
                 setImagesRaw((prev) => {
                     const existing = prev.trim();
                     return existing ? existing + "\n" + data.urls.join("\n") : data.urls.join("\n");
                 });
+                toast.success(`${data.urls.length} imagen(es) subida(s)`);
             }
         } catch (err) {
             console.error("Error uploading", err);
-            toast.error("Error al subir la imagen.");
+            toast.error("Error de red al subir la imagen.");
         } finally {
             setUploading(false);
         }

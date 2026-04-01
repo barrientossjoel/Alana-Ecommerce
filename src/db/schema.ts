@@ -1,6 +1,16 @@
 import { sqliteTable, text, integer, real } from "drizzle-orm/sqlite-core";
 import { sql } from "drizzle-orm";
 
+export const users = sqliteTable("users", {
+    id: text("id").primaryKey(),
+    name: text("name"),
+    email: text("email").unique(),
+    emailVerified: integer("email_verified", { mode: "timestamp" }),
+    image: text("image"),
+    password: text("password"),
+    role: text("role").notNull().default("user"), // "user" | "admin"
+});
+
 export const products = sqliteTable("products", {
     id: text("id").primaryKey(),
     name: text("name").notNull(),
