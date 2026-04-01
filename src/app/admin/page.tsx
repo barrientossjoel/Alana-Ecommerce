@@ -2,10 +2,17 @@ import { db } from "@/db";
 import { products } from "@/db/schema";
 import AdminDashboardClient from "./AdminDashboardClient";
 import { Product } from "./product-form";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 
 export const revalidate = 0;
 
 export default async function AdminPage() {
+    const session = await auth();
+    if (!session) {
+        redirect("/login");
+    }
+
     const allProducts = await db.select().from(products);
 
     // Map DB products to Product interface expected by client component
