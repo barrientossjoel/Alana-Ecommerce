@@ -2,13 +2,11 @@
 
 import { useState } from "react";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { toast } from "sonner";
 
 export default function LoginPage() {
-    const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [googleLoading, setGoogleLoading] = useState(false);
 
@@ -25,11 +23,11 @@ export default function LoginPage() {
 
         setLoading(false);
 
-        if (result?.error) {
+        if (result?.error || !result?.ok) {
             toast.error("Email o contraseña incorrectos.");
         } else {
-            router.push("/");
-            router.refresh();
+            // Full page reload so server components pick up the new session cookie
+            window.location.href = "/";
         }
     };
 
