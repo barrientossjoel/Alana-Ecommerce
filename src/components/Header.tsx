@@ -58,9 +58,9 @@ export default function Header() {
                     <div className="hidden md:flex flex-1 justify-end items-center gap-4 text-xs font-semibold tracking-widest text-muted-foreground">
                         <ThemeToggle />
                         <span className="text-border">|</span>
-                        <button className="hover:text-foreground transition-colors">CREAR CUENTA</button>
+                        <Link href="/register" className="hover:text-foreground transition-colors">CREAR CUENTA</Link>
                         <span className="text-border">|</span>
-                        <button className="hover:text-foreground transition-colors">INICIAR SESIÓN</button>
+                        <Link href="/login" className="hover:text-foreground transition-colors">INICIAR SESIÓN</Link>
                     </div>
                 </div>
             </header>
