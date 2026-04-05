@@ -32,7 +32,7 @@ export default function Header() {
                                 className="h-16 md:h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity drop-shadow-sm"
                             />
                             <span
-                                className="text-4xl md:text-5xl tracking-normal text-foreground pt-1 pr-2"
+                                className="text-4xl md:text-5xl tracking-normal text-primary pt-1 pr-2"
                                 style={{ fontFamily: "var(--font-script)" }}
                             >
                                 Alana

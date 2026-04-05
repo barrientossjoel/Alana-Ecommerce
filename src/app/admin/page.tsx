@@ -12,6 +12,9 @@ export default async function AdminPage() {
     if (!session) {
         redirect("/login");
     }
+    if ((session.user as { role?: string })?.role !== "admin") {
+        redirect("/");
+    }
 
     const allProducts = await db.select().from(products);
 

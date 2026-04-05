@@ -3,7 +3,7 @@ export default function Footer() {
         <footer className="bg-card text-card-foreground p-8 border-t border-border mt-auto">
             <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
                 <div className="flex flex-col gap-2">
-                    <h3 className="text-xl font-serif font-bold tracking-[0.2em] leading-none mb-2 text-primary">ALANA</h3>
+                    <span className="text-4xl leading-none mb-2 text-primary" style={{ fontFamily: "var(--font-script)" }}>Alana</span>
                     <p className="text-muted-foreground text-sm max-w-sm leading-relaxed">
                         Somos de <strong className="text-foreground">Avellaneda</strong> y tenemos puntos de encuentro para retiro: de lunes a sábados en Dock Sud, Plaza Alsina, Coto Sarandí, Mitre y las Flores, Parque Lezama, y Plaza de Mayo (horarios a convenir).
                     </p>
